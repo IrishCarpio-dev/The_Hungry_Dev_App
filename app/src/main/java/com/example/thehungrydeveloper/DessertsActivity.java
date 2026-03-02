@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -12,11 +14,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class DessertsActivity extends AppCompatActivity {
 
+    MaterialToolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_desserts);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         ListView dessertsList = findViewById(R.id.list_view_desserts);
 
@@ -32,7 +41,12 @@ public class DessertsActivity extends AppCompatActivity {
         ArrayAdapter<Dish> dishesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, desserts);
 
         dessertsList.setAdapter(dishesAdapter);
-
-
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
 }
