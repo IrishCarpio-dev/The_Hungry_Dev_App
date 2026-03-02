@@ -7,13 +7,20 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 public class MainCoursesActivity extends AppCompatActivity {
 
+    MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_courses);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ListView mainCoursesList = findViewById(R.id.list_view_main_courses);
 
@@ -33,7 +40,11 @@ public class MainCoursesActivity extends AppCompatActivity {
         ArrayAdapter<Dish> dishesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mainCourses);
 
         mainCoursesList.setAdapter(dishesAdapter);
+    }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
